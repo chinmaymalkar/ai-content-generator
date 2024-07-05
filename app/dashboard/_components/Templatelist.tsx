@@ -1,4 +1,4 @@
-import Template from '@/app/(data)/template'
+import Template from '@/app/(data)/Template'
 import React, { useEffect, useState } from 'react'
 import Templatecard from './Templatecard'
 import { Link } from 'lucide-react'
