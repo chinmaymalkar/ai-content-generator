@@ -14,7 +14,10 @@ function Usestrack() {
     },[user])
 
     const getdata= async()=>{
-        const result=await db.select().from(aioutput).where(eq(aioutput.createdBy,user?.user?.emailAddresses[0].emailAddress))
+        // const result=await db.select().from(aioutput).where(eq(aioutput.createdBy,user?.user?.emailAddresses[0].emailAddress))
+        const result = await db.select()
+        .from(aioutput)
+        .where(eq(aioutput.createdBy, user?.user?.emailAddresses[0].emailAddress)); 
         gettotaluses(result);
 
     }
