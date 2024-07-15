@@ -8,7 +8,7 @@ import { db } from '@/utils/db';
 function Usestrack() {
 
     const user =useUser();
-    const email = user?.user?.emailAddresses?.[0]?.emailAddress;
+    const email:string = user?.user?.emailAddresses?.[0]?.emailAddress;
     const [totalUses,setTotalUses]=useState();
     useEffect(()=>{
         user && getdata()
@@ -20,7 +20,7 @@ function Usestrack() {
         // .from(aioutput)
         // .where(eq(aioutput.createdBy, user?.user?.emailAddresses[0].emailAddress)); 
         // gettotaluses(result);
-        const result = await db.select()
+        const result:string = await db.select()
         .from(aioutput)
         .where(eq(aioutput.createdBy, email));
 
