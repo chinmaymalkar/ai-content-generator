@@ -8,6 +8,7 @@ import { db } from '@/utils/db';
 function Usestrack() {
 
     const user =useUser();
+    const email = user?.user?.emailAddresses?.[0]?.emailAddress;
     const [totalUses,setTotalUses]=useState();
     useEffect(()=>{
         user && getdata()
@@ -15,10 +16,13 @@ function Usestrack() {
 
     const getdata= async()=>{
         // const result=await db.select().from(aioutput).where(eq(aioutput.createdBy,user?.user?.emailAddresses[0].emailAddress))
+        // const result = await db.select()
+        // .from(aioutput)
+        // .where(eq(aioutput.createdBy, user?.user?.emailAddresses[0].emailAddress)); 
+        // gettotaluses(result);
         const result = await db.select()
         .from(aioutput)
-        .where(eq(aioutput.createdBy, user?.user?.emailAddresses[0].emailAddress)); 
-        gettotaluses(result);
+        .where(eq(aioutput.createdBy, email));
 
     }
     const gettotaluses=(result)=>{
