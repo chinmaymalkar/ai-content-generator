@@ -16,15 +16,21 @@ interface PROPS{
     'template-slug' :string
   }
 }
+
 interface FormData {
   // Define the structure of your form data here
   [key: string]: any;
 }
+
 function CreateNewContent(props :PROPS) {
   const [loading,setLoading]=useState(false)
   const user=useUser()
   const [Aioutput,setAioutput]=useState<string>('')
-  const GenerateAIcontent = async (formdata:any)=>{
+  const GenerateAIcontent = async (formdata:FormData)=>{
+    if (!selectedtemplate || !selectedtemplate.slug) {
+      console.error('Selected template or template slug is undefined');
+      return;
+    }
     setLoading(true)
     const selectedPrompt= selectedtemplate?.aiprompt;
     const finalprompt=JSON.stringify(formdata)+", "+selectedPrompt;
@@ -37,7 +43,7 @@ function CreateNewContent(props :PROPS) {
     await saveindb(formdata,selectedtemplate?.slug,result)
     
   }
-  const saveindb=async (formdata:FormData,slug:string,Aioutput:string) =>{
+  const saveindb=async (formdata : FormData,slug:string ,Aioutput: string) =>{
     const plainFormData = JSON.parse(JSON.stringify(formdata));
 
     const result=await db.insert(aioutput).values(
@@ -46,7 +52,7 @@ function CreateNewContent(props :PROPS) {
         templateSlug:slug,
         aiResponse:Aioutput,
         createdAt:Date.now(),
-        createdBy:user?.user?.emailAddresses[0].emailAddress,
+        createdBy:user?.user?.emailAddresses[0].emailAddress || '',
       }
     )
     console.log(result)
