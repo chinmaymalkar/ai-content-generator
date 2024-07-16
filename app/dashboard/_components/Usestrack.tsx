@@ -8,7 +8,7 @@ import { db } from '@/utils/db';
 function Usestrack() {
 
     const user =useUser();
-    const email:string = user?.user?.emailAddresses?.[0]?.emailAddress;
+    const email:string | undefined  = user?.user?.emailAddresses?.[0]?.emailAddress;
     const [totalUses,setTotalUses]=useState();
     useEffect(()=>{
         user && getdata()
