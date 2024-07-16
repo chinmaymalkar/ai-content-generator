@@ -16,6 +16,10 @@ interface PROPS{
     'template-slug' :string
   }
 }
+interface FormData {
+  // Define the structure of your form data here
+  [key: string]: any;
+}
 function CreateNewContent(props :PROPS) {
   const [loading,setLoading]=useState(false)
   const user=useUser()
@@ -33,7 +37,7 @@ function CreateNewContent(props :PROPS) {
     await saveindb(formdata,selectedtemplate?.slug,result)
     
   }
-  const saveindb=async (formdata,slug,Aioutput) =>{
+  const saveindb=async (formdata:FormData,slug,Aioutput) =>{
     const plainFormData = JSON.parse(JSON.stringify(formdata));
 
     const result=await db.insert(aioutput).values(
