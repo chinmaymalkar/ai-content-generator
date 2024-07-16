@@ -32,7 +32,7 @@ function Usestrack() {
         // const result :string = await db.select()
         // .from(aioutput)
         // .where(eq(aioutput.createdBy, email));
-      const result : HISTORY[]=await db.select().from(aioutput).where(eq(aioutput.createdBy,user?.user?.emailAddresses[0].emailAddress))
+      const result : any=await db.select().from(aioutput).where(eq(aioutput.createdBy,user?.user?.emailAddresses[0].emailAddress))
         gettotaluses(result);
 
     }
