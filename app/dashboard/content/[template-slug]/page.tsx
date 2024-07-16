@@ -37,7 +37,7 @@ function CreateNewContent(props :PROPS) {
     await saveindb(formdata,selectedtemplate?.slug,result)
     
   }
-  const saveindb=async (formdata:FormData,slug,Aioutput) =>{
+  const saveindb=async (formdata:FormData,slug:string,Aioutput:string) =>{
     const plainFormData = JSON.parse(JSON.stringify(formdata));
 
     const result=await db.insert(aioutput).values(
