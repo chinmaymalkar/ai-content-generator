@@ -5,24 +5,35 @@ import React, { useEffect, useState } from 'react'
 import {eq} from 'drizzle-orm'
 import { db } from '@/utils/db';
 
+
+export interface HISTORY{
+  id:Number,
+  formData:string,
+  aiResponse:string,
+  templateSlug:string,
+  createdBy:string,
+  createdAt:string
+}
+
+
 function Usestrack() {
 
     const user =useUser();
-    const email:string | undefined  = user?.user?.emailAddresses?.[0]?.emailAddress;
+    const email = user?.user?.emailAddresses?.[0]?.emailAddress;
     const [totalUses,setTotalUses]=useState();
     useEffect(()=>{
         user && getdata()
     },[user])
 
     const getdata= async()=>{
-        // const result=await db.select().from(aioutput).where(eq(aioutput.createdBy,user?.user?.emailAddresses[0].emailAddress))
-        // const result = await db.select()
+      // const result = await db.select()
+      //   .from(aioutput)
+      //   .where(eq(aioutput.createdBy, user?.user?.emailAddresses[0].emailAddress));  
+        // const result :string = await db.select()
         // .from(aioutput)
-        // .where(eq(aioutput.createdBy, user?.user?.emailAddresses[0].emailAddress)); 
-        // gettotaluses(result);
-        const result:string = await db.select()
-        .from(aioutput)
-        .where(eq(aioutput.createdBy, email));
+        // .where(eq(aioutput.createdBy, email));
+      const result : HISTORY[]=await db.select().from(aioutput).where(eq(aioutput.createdBy,user?.user?.emailAddresses[0].emailAddress))
+        gettotaluses(result);
 
     }
     const gettotaluses=(result)=>{
